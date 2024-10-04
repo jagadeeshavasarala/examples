@@ -1,5 +1,6 @@
 import argparse
 import torch
+import time
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
@@ -10,8 +11,8 @@ from torch.optim.lr_scheduler import StepLR
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, 3, 1)
-        self.conv2 = nn.Conv2d(32, 64, 3, 1)
+        self.conv1 = nn.Conv2d(1, 128, 3, 1)
+        self.conv2 = nn.Conv2d(128, 64, 3, 1)
         self.dropout1 = nn.Dropout(0.25)
         self.dropout2 = nn.Dropout(0.5)
         self.fc1 = nn.Linear(9216, 128)
@@ -76,7 +77,7 @@ def main():
                         help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                         help='input batch size for testing (default: 1000)')
-    parser.add_argument('--epochs', type=int, default=14, metavar='N',
+    parser.add_argument('--epochs', type=int, default=150, metavar='N',
                         help='number of epochs to train (default: 14)')
     parser.add_argument('--lr', type=float, default=1.0, metavar='LR',
                         help='learning rate (default: 1.0)')
@@ -139,6 +140,12 @@ def main():
     if args.save_model:
         torch.save(model.state_dict(), "mnist_cnn.pt")
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
+  #  num_runs = 10  # Adjust the number of times you want to run the program
+
+ #   for i in range(1, num_runs + 1):
+#        print(f"Run {i}:")
+     #   main()
+    #    print("\nWaiting for 2 seconds before the next run...")
+   #     time.sleep(2)
